@@ -1,8 +1,8 @@
 /**
- * IO��
+ * IO??
  * @Author vs
- * @Description //get(IO����)
- * @Date 2019��11��24��17��40��
+ * @Description //get(IO????)
+ * @Date 2019??11??24??17??40??
  * @Param
  * @return
  **/
@@ -20,11 +20,11 @@ public class IO {
 
     public void in_IO_queue()
     {
-        //��IO����
+        //??IO????
     }
 
     public void out_IO_queue()
     {
-        //��IO����
+        //??IO????
     }
 }
