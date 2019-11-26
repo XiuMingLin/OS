@@ -1,8 +1,8 @@
 /**
- * IOÀà
+ * IOï¿½ï¿½
  * @Author vs
- * @Description //get(IO¶ÓÁÐ)
- * @Date 2019Äê11ÔÂ24ÈÕ17µã40·Ö
+ * @Description //get(IOï¿½ï¿½ï¿½ï¿½)
+ * @Date 2019ï¿½ï¿½11ï¿½ï¿½24ï¿½ï¿½17ï¿½ï¿½40ï¿½ï¿½
  * @Param
  * @return
  **/
@@ -12,7 +12,7 @@ package com.os.homework;
 import java.util.Queue;
 
 public class IO {
-    private Queue<process> IO_queue;    //IO¶ÓÁÐ
+    private Queue<process> IO_queue;    //IOé˜Ÿåˆ—
 
     public Queue<process> getIO_queue() {
         return IO_queue;
@@ -20,11 +20,11 @@ public class IO {
 
     public void in_IO_queue()
     {
-        //ÈëIO¶ÓÁÐ
+        //ï¿½ï¿½IOï¿½ï¿½ï¿½ï¿½
     }
 
     public void out_IO_queue()
     {
-        //³öIO¶ÓÁÐ
+        //ï¿½ï¿½IOï¿½ï¿½ï¿½ï¿½
     }
 }
