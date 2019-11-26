@@ -74,4 +74,34 @@ public class process {
     public void setRuntime(float runtime) {
         this.runtime = runtime;
     }
+
+    public void run()
+    {
+        this.runtime ++;
+
+    }
+    public boolean ifpv(){
+
+        for (float i: this.Critical_stime_List){
+            if(i == runtime){
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean ifio(){
+        for(float i: this.IO_stime_List){
+            if(i == runtime){
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean iffinish(){
+        if(this.Server_time == runtime){
+            return true;
+        }
+        return false;
+    }
+
 }
