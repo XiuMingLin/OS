@@ -35,6 +35,7 @@ public class timearound {
     public void RUN()
     {
         //ÔËÐÐ
+        System.out.println("xixi");
     }
 
     public void R2B_queue(process pro)
