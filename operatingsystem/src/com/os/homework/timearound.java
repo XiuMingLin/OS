@@ -10,21 +10,26 @@
 package com.os.homework;
 
 import java.sql.SQLOutput;
-import java.util.Queue;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.Date;
+import java.util.*;
 import java.text.SimpleDateFormat;
 
 
 public class timearound {
     private int nowtime= 0 ;
+    IO io = new IO();
+    boolean ioflag = false;
+    static PV[] pv = new PV[2];
+    static {
+        pv[0] = new PV();
+        pv[1] = new PV();
+    }
     process process1 = new process();
     process process2 = new process();
     process process3 = new process();
+    process pc = new process();
     private float time_size;            //时间片大小
-    private Queue<process> ready_queue; //就绪队列
-    private Queue<process> block_queue; //阻塞队列
+    private ArrayList<process> ready_queue = new ArrayList<process>(); //就绪队列
+    private ArrayList<process> pvblock_queue = new ArrayList<process>(); //阻塞队列
 
     public void setTime_size(float time_size) {
         this.time_size = time_size;
@@ -34,86 +39,78 @@ public class timearound {
         return time_size;
     }
 
-    public Queue<process> getReady_queue() {
+    public ArrayList<process> getReady_queue() {
         return ready_queue;
     }
 
-    public Queue<process> getBlock_queue() {
-        return block_queue;
+    public ArrayList<process> getBlock_queue() {
+        return pvblock_queue;
     }
 
     public void init_pro(){
         //初始化三个进程,从界面获取数据
 
     }
-    public void RUN()
-    {
+    public void arrive(){
+        if (process1.getArrive_time()==nowtime){
+            ready_queue.add(process1);
+        }
+        if (process2.getArrive_time()==nowtime){
+            ready_queue.add(process2);
+        }
+        if (process3.getArrive_time()==nowtime){
+            ready_queue.add(process3);
+        }
+    }
+    public void io_op(){
+        if(!io.ifempty()){
+            ioflag = io.run();
+            if (ioflag){
+                process p = io.out_IO_queue();
+                ready_queue.add(p);
+            }
+        }
+    }
+    public void RUN(){
         //运行
-        IO io = new IO();
+
         int cacheTime = 1000,delay = 2000;
         init_pro();
-        int whichpro = 0;
 
         //单位时间一个循环
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-//                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-//                System.out.println(df.format(new Date()));// new Date()为获取当前系统时间
-
-                if(nowtime%time_size ==0 ) {   //时间片结束 调度
-                    //判断pv队列中谁能进就绪队列，进程到达就进入就绪队列
-
-                    //就绪队列换顺序
-
-                }
+                int whichpvsource = 0 ;
                 nowtime++;
+                arrive(); //到达进入就绪队列
+                io_op();  //io运行 io完成进入就绪队列
 
-                //io.run   判断io是否完成  完成后进入就绪队列
-                if(true){
-
-                }
-
-
+                pc = ready_queue.get(0);
                 //从就绪进程中选择一个上cpu , 完成、io、pv资源被占用的离开
-                if(whichpro == 1){
-                    process1.run();
+                pc.run();
 
-                    if(process1.iffinish()) {
-                        //出就绪队列
-                    }
-                    if(process1.ifio()){
-                        //进入io队列
-                        io.in_IO_queue();
-                    }
-                    if (process1.ifpv()){
-                        //进入pv队列
-                    }
-                }else if(whichpro == 2){
-                    process1.run();
-                    if(process1.iffinish()) {
-                        //出就绪队列
-                    }
-                    if(process1.ifio()){
-                        //进入io队列
-                    }
-                    if (process1.ifpv()){
-                        //进入pv队列
-                    }
-                }else if(whichpro == 3){
-                    process1.run();
-                    if(process1.iffinish()) {
-                        //出就绪队列
-                    }
-                    if(process1.ifio()){
-                        //进入io队列
-                    }
-                    if(process1.ifpv()){
-                        //进入pv队列
-                    }
+                if(pc.iffinish()) {
+                    ready_queue.remove(0);
                 }
-
+                else if(pc.ifio()){
+                    io.in_IO_queue(pc);
+                    ready_queue.remove(0);
+                }
+                else if (pc.ifp()){
+                    p();
+                }else if(pc.ifv()){
+                    v();
+                }
+                else {
+                    ready_queue.set(0,pc);
+                }
+                if(nowtime%time_size ==0 ) {   //时间片结束 调度
+                    process temp = ready_queue.get(0);
+                    ready_queue.remove(0);
+                    ready_queue.add(temp);
+                }
             }
         }, delay, cacheTime);
 
@@ -123,10 +120,60 @@ public class timearound {
     public void R2B_queue(process pro)
     {
         //就绪队列——阻塞队列
+
+        pvblock_queue.add(pro);
+        ready_queue.remove(pro);
     }
 
     public void B2R_queue(process pro)
     {
         //阻塞队列——就绪队列
+        ready_queue.add(pro);
+        pvblock_queue.remove(pro);
+    }
+    public void p(){
+        int  whichpvsource = pc.whichp();
+        if(whichpvsource!=3){
+            if(!pv[whichpvsource-1].ifoccupy)  //资源没有被占用
+                pv[whichpvsource-1].P();
+            else{
+                //资源被占用 进入pv队列
+                R2B_queue(pc);
+            }
+        }
+        else{
+            if(!pv[0].ifoccupy&&!pv[1].ifoccupy) { //资源没有被占用
+                pv[1].P();
+                pv[0].P();
+            }
+            else{
+                //资源被占用 进入pv队列
+                R2B_queue(pc);
+            }
+        }
+
+
+    }
+    public void v(){
+        //释放资源
+        int  whichv = pc.whichv();
+        if(whichv!=3)
+            pv[whichv-1].V();
+        else{
+            pv[0].V();
+            pv[1].V();
+        }
+        //判断pv队列中哪一个进就绪队列
+        int which_source;
+        for(process i :pvblock_queue){
+            which_source = i.whichp();
+            if (which_source == 3&&pv[0].ifoccupy==false&&pv[1].ifoccupy==false){
+                B2R_queue(i);
+            }else {
+                if(!pv[which_source-1].ifoccupy){
+                    B2R_queue(i);
+                }
+            }
+        }
     }
 }

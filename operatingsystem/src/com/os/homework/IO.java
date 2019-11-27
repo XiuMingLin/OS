@@ -9,33 +9,40 @@
 
 package com.os.homework;
 
-import java.util.Queue;
+import java.util.*;
 
 public class IO {
-    private Queue<process> IO_queue;    //IO队列
+    private ArrayList<process> IO_queue;    //IO队列
 
-    public Queue<process> getIO_queue() {
+    public ArrayList<process> getIO_queue() {
         return IO_queue;
     }
 
-    public void in_IO_queue()
+    public void in_IO_queue(process pro)
     {
-        //??IO????
+        IO_queue.add(pro);
     }
 
-    public void out_IO_queue()
-    {
-        //??IO????
+    public process out_IO_queue() {
+        process out = IO_queue.get(0);
+        IO_queue.remove(0);
+        return out;
     }
-    public void run(){
+    public boolean run(){
 
-        process process1 = new process();
-        //io 如果不为空 每秒加一次时间
-        process1.run();
-        if(process1.iofinish()){
-            // 完成的返回就绪队列
+        if(!IO_queue.isEmpty()) { //io 如果不为空 每秒加一次时间
+            process process1 = IO_queue.get(0);
+            process1.run();
+            IO_queue.set(0,process1);
+            if(process1.iofinish()){
+                // 完成的返回 就绪队列
+                return true;
+            }
 
         }
-
+        return false;
+    }
+    public boolean ifempty(){
+        return IO_queue.isEmpty();
     }
 }

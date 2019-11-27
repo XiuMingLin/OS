@@ -7,15 +7,6 @@
 package com.os.homework;
 
 public class dispatch {
-    public static void IO_start()
-    {
-        //IO¿ªÊ¼
-    }
-
-    public static void IO_end()
-    {
-        //IO½áÊø
-    }
 
     public static void CPU_start()
     {

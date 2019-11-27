@@ -12,28 +12,16 @@ package com.os.homework;
 import java.util.Queue;
 
 public class PV {
-    private Queue<process> PV_queue;    //pv队列
+    boolean ifoccupy = false;
 
-    public Queue<process> getPV_queue() {
-        return PV_queue;
-    }
 
-    public void in_PV_queue()
-    {
-
-    }
-
-    public void out_PV_queue()
-    {
-
-    }
     public void P()
     {
-        //进行P操作
+        ifoccupy = true;
     }
 
     public void V()
     {
-        //进行V操作
+        ifoccupy = false;
     }
 }

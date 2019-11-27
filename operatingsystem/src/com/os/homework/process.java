@@ -15,6 +15,10 @@ public class process {
     private float Server_time;      //运行时间
     private ArrayList<Float> Critical_stime_List;       //临界资源开始时间的列表（多次）
     private ArrayList<Float> Critical_etime_Liat;       //临界资源结束时间的列表（多次）
+    int p1_s_time = -1;
+    int p1_e_time = -1;
+    int p2_s_time = -1;
+    int p2_e_time = -1;
     private ArrayList<Float> IO_stime_List;             //IO开始时间（多次）
     private ArrayList<Float> IO_etime_List;             //IO结束时间（多次）
     private float runtime;          //已运行时间
@@ -80,9 +84,10 @@ public class process {
         this.runtime ++;
 
     }
-    public boolean ifpv(){
 
+    public boolean ifp(){
         for (float i: this.Critical_stime_List){
+
             if(i == runtime){
                 return true;
             }
@@ -91,6 +96,7 @@ public class process {
     }
     public boolean ifio(){
         for(float i: this.IO_stime_List){
+
             if(i == runtime){
                 return true;
             }
@@ -104,12 +110,41 @@ public class process {
         return false;
     }
     public boolean iofinish(){
+
         for(float i: this.IO_etime_List){
+
             if(i == runtime){
                 return true;
             }
         }
         return false;
     }
+    public boolean ifv(){
+        for(float i: Critical_etime_Liat){
 
+            if(i == runtime){
+                return true;
+            }
+        }
+        return false;
+    }
+    public int whichv(){
+        if(runtime == p1_s_time){
+            return 1;
+        }else if(runtime == p2_s_time){
+            return 2;
+        } else if(runtime == p2_s_time&&runtime == p1_s_time)
+            return 3;
+        return 0;
+    }
+    public int whichp(){
+        if(runtime == p1_s_time){
+            return 1;
+        }else if(runtime == p2_s_time){
+            return 2;
+        }
+        else if(runtime == p2_s_time&&runtime == p1_s_time)
+            return 3;
+        return 0;
+    }
 }
