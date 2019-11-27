@@ -49,6 +49,7 @@ public class timearound {
     public void RUN()
     {
         //运行
+        IO io = new IO();
         int cacheTime = 1000,delay = 2000;
         init_pro();
         int whichpro = 0;
@@ -58,15 +59,22 @@ public class timearound {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-                System.out.println(df.format(new Date()));// new Date()为获取当前系统时间
+//                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+//                System.out.println(df.format(new Date()));// new Date()为获取当前系统时间
 
                 if(nowtime%time_size ==0 ) {   //时间片结束 调度
-                    //判断谁进就绪队列
+                    //判断pv队列中谁能进就绪队列，进程到达就进入就绪队列
 
+                    //就绪队列换顺序
 
                 }
                 nowtime++;
+
+                //io.run   判断io是否完成  完成后进入就绪队列
+                if(true){
+
+                }
+
 
                 //从就绪进程中选择一个上cpu , 完成、io、pv资源被占用的离开
                 if(whichpro == 1){
@@ -77,6 +85,7 @@ public class timearound {
                     }
                     if(process1.ifio()){
                         //进入io队列
+                        io.in_IO_queue();
                     }
                     if (process1.ifpv()){
                         //进入pv队列
@@ -104,7 +113,7 @@ public class timearound {
                         //进入pv队列
                     }
                 }
-                //更新就绪队列
+
             }
         }, delay, cacheTime);
 

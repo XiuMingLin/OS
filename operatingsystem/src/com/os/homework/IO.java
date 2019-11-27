@@ -27,4 +27,15 @@ public class IO {
     {
         //??IO????
     }
+    public void run(){
+
+        process process1 = new process();
+        //io 如果不为空 每秒加一次时间
+        process1.run();
+        if(process1.iofinish()){
+            // 完成的返回就绪队列
+
+        }
+
+    }
 }

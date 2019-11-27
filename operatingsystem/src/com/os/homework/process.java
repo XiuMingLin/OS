@@ -103,5 +103,13 @@ public class process {
         }
         return false;
     }
+    public boolean iofinish(){
+        for(float i: this.IO_etime_List){
+            if(i == runtime){
+                return true;
+            }
+        }
+        return false;
+    }
 
 }
