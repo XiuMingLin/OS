@@ -3,6 +3,7 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/src/com/os/homework/IO.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/os/homework/PV.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/os/homework/UI/TimeClip.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/os/homework/dispatch.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/os/homework/process.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/os/homework/timearound.java" charset="GBK" />
