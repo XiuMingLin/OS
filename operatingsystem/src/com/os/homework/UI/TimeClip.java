@@ -16,13 +16,17 @@ public class TimeClip extends JPanel {
     }
     TimeClip(){
 
+        this.add(Box.createHorizontalStrut(220));
         this.add(timeClipLable);
+        this.add(Box.createHorizontalStrut(50));
         this.add(timeClipTF);
+        this.add(Box.createHorizontalStrut(50));
         this.add(timeClipButton);
+        this.add(Box.createHorizontalStrut(220));
 
 
 
-        this.setSize(750, 300);
+        this.setSize(750, 80);
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         this.setBorder(BorderFactory.createTitledBorder ("…Ë÷√ ±º‰∆¨"));
     }

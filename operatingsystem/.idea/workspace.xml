@@ -2,12 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c36e36f3-634b-4663-b4b0-8f8f3e5862b4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/os/homework/UI/TimeClip.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/os/homework/UI/UI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/os/homework/UI/ProcessRuntime.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/os/homework/UI/Source.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/os/homework/UI/UtilInfos.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/os/homework/UI/_Process.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/os/homework/my_fucking_UI.form" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/os/homework/my_fucking_UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/os/homework/my_fucking_UI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/os/homework/UI/TimeClip.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/os/homework/UI/TimeClip.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/os/homework/UI/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/os/homework/UI/UI.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -99,7 +101,7 @@
       <workItem from="1574586260260" duration="2277000" />
       <workItem from="1574765280372" duration="339000" />
       <workItem from="1574830259749" duration="4082000" />
-      <workItem from="1574853198770" duration="1595000" />
+      <workItem from="1574853198770" duration="9173000" />
     </task>
     <servers />
   </component>
