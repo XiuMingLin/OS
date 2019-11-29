@@ -32,7 +32,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../JAVA/Library" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -53,13 +53,26 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.UI">
     <configuration name="MAIN" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.os.homework.MAIN" />
       <module name="operatingsystem" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.os.homework.*" />
+          <option name="PATTERN" value="com.os.homework.UI.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.os.homework.UI.UI" />
+      <module name="operatingsystem" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.os.homework.UI.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -69,6 +82,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.UI" />
         <item itemvalue="Application.MAIN" />
       </list>
     </recent_temporary>
@@ -85,8 +99,9 @@
       <updated>1574586256494</updated>
       <workItem from="1574586260260" duration="2277000" />
       <workItem from="1574765280372" duration="339000" />
-      <workItem from="1574830259749" duration="4680000" />
-      <workItem from="1574855541279" duration="6624000" />
+      <workItem from="1574830259749" duration="4082000" />
+      <workItem from="1574853198770" duration="9173000" />
+      <workItem from="1574926280118" duration="1960000" />
     </task>
     <servers />
   </component>
