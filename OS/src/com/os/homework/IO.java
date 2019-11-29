@@ -12,7 +12,7 @@ package com.os.homework;
 import java.util.*;
 
 public class IO {
-    private ArrayList<process> IO_queue;    //IO队列
+    private ArrayList<process> IO_queue = new ArrayList<process>();    //IO队列
 
     public ArrayList<process> getIO_queue() {
         return IO_queue;

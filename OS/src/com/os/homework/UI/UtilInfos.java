@@ -1,15 +1,17 @@
 package com.os.homework.UI;
 
+import com.os.homework.process;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class UtilInfos extends JPanel {
     JLabel cpuLabel = new JLabel("cpu");
-    JLabel IOLabel = new JLabel("进程");
+    JLabel IOLabel = new JLabel("IO");
     JLabel timeLabel = new JLabel("当前时间");
-    JTextField cpuTF = new JTextField(6);
-    JTextField IOTF = new JTextField(6);
-    JTextField timeTF = new JTextField(6);
+    static JTextField cpuTF = new JTextField(6);
+    static JTextField IOTF = new JTextField(6);
+    static JTextField timeTF = new JTextField(6);
 
     private static UtilInfos instance;
     public static UtilInfos getInstance(){
@@ -65,5 +67,22 @@ public class UtilInfos extends JPanel {
         this.setSize(375, 80);
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         this.setBorder(BorderFactory.createTitledBorder ("运行时间信息"));
+    }
+
+    public static void Updateinfo(process pro, int runtime)
+    {
+        if(pro != null) {
+            cpuTF.setText(pro.getPro_name());
+        }
+        else
+        {
+            cpuTF.setText("");
+        }
+        timeTF.setText(String.valueOf(runtime));
+    }
+
+    public static void UpdateIO(process IO)
+    {
+        IOTF.setText(IO.getPro_name());
     }
 }

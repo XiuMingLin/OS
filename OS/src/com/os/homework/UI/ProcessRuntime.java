@@ -7,9 +7,9 @@ public class ProcessRuntime extends JPanel {
     JLabel process1Label = new JLabel("进程1运行时间");
     JLabel process2Label = new JLabel("进程2运行时间");
     JLabel process3Label = new JLabel("进程3运行时间");
-    JTextField process1TF = new JTextField(6);
-    JTextField process2TF = new JTextField(6);
-    JTextField process3TF = new JTextField(6);
+    static JTextField process1TF = new JTextField(6);
+    static JTextField process2TF = new JTextField(6);
+    static JTextField process3TF = new JTextField(6);
 
     private static ProcessRuntime instance;
     public static ProcessRuntime getInstance(){
@@ -65,5 +65,12 @@ public class ProcessRuntime extends JPanel {
         this.setSize(375, 80);
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         this.setBorder(BorderFactory.createTitledBorder ("进程运行时间"));
+    }
+
+    public static void UpdateTime()
+    {
+        process1TF.setText(String.valueOf(UI.tr.getProcess1().getRuntime()));
+        process2TF.setText(String.valueOf(UI.tr.getProcess2().getRuntime()));
+        process3TF.setText(String.valueOf(UI.tr.getProcess3().getRuntime()));
     }
 }
