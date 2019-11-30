@@ -116,7 +116,7 @@ public class timearound {
     public void RUN(){
         //运行
 
-        int cacheTime = 6000,delay = 2000;
+        int cacheTime = 1000,delay = 2000;
         init_pro();
 
         //单位时间一个循环
@@ -155,9 +155,8 @@ public class timearound {
     public void find_run_process(){
         if(!ready_queue.isEmpty()) {  //就绪队列非空
             pc = ready_queue.get(0);  //获得队首
-
             if (pc!=null&&pc.iffinish()) {
-                ready_queue.remove(0);
+                ready_queue.remove(pc);
                 System.out.println(pc.getPro_name()+"结束"+nowtime);
                 count++;
                 while (refreshtime%time_size!=0){
@@ -165,7 +164,11 @@ public class timearound {
                 }
                 if(count ==3 )
                 {
-                    return;
+                    try {
+                        Thread.sleep(90000000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
                 find_run_process();
             }
@@ -183,9 +186,9 @@ public class timearound {
             if (pc!=null&&pc.ifv()) {
                 v();
                 UtilInfos.Updateinfo(pc, nowtime);
-                ready_queue.set(0, pc);
+                //ready_queue.set(0, pc);
             }
-            }
+        }
         else{
             pc = null;
         }
@@ -210,7 +213,7 @@ public class timearound {
     }
     public void p(){
         int  whichpvsource = pc.whichp();
-        if(whichpvsource!=3){
+        if(whichpvsource==1||whichpvsource==2){
             if(!pv[whichpvsource-1].ifoccupy)  //资源没有被占用
             {
                 pv[whichpvsource - 1].P();
@@ -221,18 +224,24 @@ public class timearound {
                 //资源被占用 进入pv队列
                 R2B_queue(pc);
                 find_run_process();
+                while (refreshtime%time_size!=0){
+                    refreshtime--;
+                }
             }
         }
-        else{
+        else if(whichpvsource == 3){
             if(!pv[0].ifoccupy&&!pv[1].ifoccupy) { //资源没有被占用
                 pv[1].P();
                 pv[0].P();
                 Source.UpdateSouce(whichpvsource, pc);
-
             }
             else{
                 //资源被占用 进入pv队列
                 R2B_queue(pc);
+                find_run_process();
+                while (refreshtime%time_size!=0){
+                    refreshtime--;
+                }
             }
         }
 
@@ -252,14 +261,17 @@ public class timearound {
         }
         //判断pv队列中哪一个进就绪队列
         int which_source;
-        for(process i :pvblock_queue){
-            which_source = i.whichp();
-            if (which_source == 3&&pv[0].ifoccupy==false&&pv[1].ifoccupy==false){
-                B2R_queue(i);
-            }else {
-                if(which_source!=0&&!pv[which_source-1].ifoccupy){
-                    B2R_queue(i);
+        if(!pvblock_queue.isEmpty()){
+            for(int i =0 ; i<pvblock_queue.size();i++){
+                process processsssssss = pvblock_queue.get(i);
+                which_source = processsssssss.whichp();
+                if (which_source == 3&&pv[0].ifoccupy==false&&pv[1].ifoccupy==false){
+                    B2R_queue(processsssssss);
                 }
+                if((which_source==1||which_source ==2)&&!pv[which_source-1].ifoccupy){
+                    B2R_queue(processsssssss);
+                }
+
             }
         }
     }

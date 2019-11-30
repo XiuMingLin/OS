@@ -130,11 +130,11 @@ public class process {
         return false;
     }
     public int whichv(){
-        if(runtime == p2_s_time&&runtime == p1_s_time)
+        if(runtime == p2_e_time&&runtime == p1_e_time)
             return 3;
-        else if(runtime == p2_s_time){
+        else if(runtime == p2_e_time){
             return 2;
-        } else if(runtime == p1_s_time){
+        } else if(runtime == p1_e_time){
             return 1;
         }
         return 0;
