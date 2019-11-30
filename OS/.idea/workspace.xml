@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8de7bcf2-125e-4aa6-a0c8-37817cea6699" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/os/homework/UI/Background.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/os/homework/UI/bg.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OS/META-INF/OS.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/os/homework/UI/LogList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/os/homework/UI/LogList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/os/homework/UI/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/os/homework/UI/UI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/os/homework/UI/UtilInfos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/os/homework/UI/UtilInfos.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/os/homework/timearound.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/os/homework/timearound.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,6 +43,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Study\Github\OS\OS\src\com\os\homework\UI" />
       <recent name="C:\Users\xixi\Documents\GitHub\OS\OS\src\com\os\homework" />
     </key>
   </component>
@@ -87,7 +90,7 @@
       <option name="presentableId" value="Default" />
       <updated>1575028399040</updated>
       <workItem from="1575028402285" duration="6776000" />
-      <workItem from="1575122560400" duration="2441000" />
+      <workItem from="1575122560400" duration="10507000" />
     </task>
     <servers />
   </component>
@@ -110,7 +113,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/os/homework/timearound.java</url>
-          <line>231</line>
+          <line>253</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>

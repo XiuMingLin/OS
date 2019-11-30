@@ -1,5 +1,6 @@
 package com.os.homework.UI;
 import com.os.homework.timearound;
+import javafx.scene.layout.BackgroundImage;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,14 +20,17 @@ public class UI extends JFrame {
         //JPanel firstPanel = new JPanel(new FlowLayout());
         //firstPanel.setSize(480,480);
         this.setLayout(new FlowLayout());
-        this.setSize(900,800);
+        this.setSize(900,900);
+//        JPanel bg = new Background();
         this.add(TimeClip.getInstance());
         this.add(_Process.getInstance());
         this.add(ProcessRuntime.getInstance());
         this.add(Source.getInstance());
         this.add(UtilInfos.getInstance());
+
         tr = new timearound();
         this.add(LogList.getInstance());
+        this.add(Background.getInstance());
 
         //this.setLayout(new BorderLayout());
 

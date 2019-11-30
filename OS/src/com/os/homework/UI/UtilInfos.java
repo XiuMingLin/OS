@@ -110,7 +110,7 @@ public class UtilInfos extends JPanel {
         {
             cpuTF.setText("");
         }
-        timeTF.setText(String.valueOf(runtime));
+        timeTF.setText(String.valueOf(runtime + 1));
     }
 
     public static void UpdateIO(process IO)

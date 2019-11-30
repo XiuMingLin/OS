@@ -14,7 +14,9 @@ import com.os.homework.UI.ProcessRuntime;
 import com.os.homework.UI.Source;
 import com.os.homework.UI.UtilInfos;
 
+import javax.swing.*;
 import java.util.*;
+import java.util.Timer;
 
 
 public class timearound {
@@ -41,6 +43,7 @@ public class timearound {
     private int time_size;            //时间片大小
     private ArrayList<process> ready_queue = new ArrayList<process>(); //就绪队列
     private ArrayList<process> pvblock_queue = new ArrayList<process>(); //阻塞队列
+    boolean deadlock = false;
 
     public void setTime_size(int time_size) {
         this.time_size = time_size;
@@ -125,6 +128,13 @@ public class timearound {
         int cacheTime = 1000,delay = 2000;
         init_pro();
 
+        if(timer != null) {
+            timer = null;
+            nowtime = 0;
+            count = 0;
+            refreshtime = 0;
+        }
+
         //单位时间一个循环
         timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -135,6 +145,17 @@ public class timearound {
                 ProcessRuntime.UpdateTime();
 
                 find_run_process();
+                if(count >=3 )
+                {
+                    LogList._instance.getLogList().append("RunTime:"+nowtime+"运行结束\n");
+                    timer.cancel();
+                    return;
+                }
+
+                if(deadlock)
+                {
+                    return;
+                }
                 if(!ready_queue.isEmpty()) {
                     pc.run();
                     LogList._instance.getLogList().append("RunTime:"+nowtime+pc.getPro_name()+"在CPU上运行\n");
@@ -160,14 +181,22 @@ public class timearound {
                     LogList._instance.getLogList().append("RunTime:"+nowtime+"时间片结束\n");
                     process temp = ready_queue.get(0);
                     ready_queue.remove(0);
-                    if(temp.getRuntime()!=temp.getServer_time())
+//                    if(temp.getRuntime()!=temp.getServer_time())
                         ready_queue.add(temp);
-                    else{
-                        System.out.println(temp.getPro_name()+"结束"+nowtime);
+//                    else{
+//                        System.out.println(temp.getPro_name()+"结束1"+nowtime);
+//                        newcount++;
+//                        System.out.println(newcount);
+//                        if(newcount >= 3)
+//                        {
+//                            LogList._instance.getLogList().append("RunTime:"+nowtime+"运行结束\n");
+//                            timer.cancel();
+//                        }
                     }
                 }
 
-            }
+
+//            }
         }, delay, cacheTime);
     }
     public void find_run_process(){
@@ -175,20 +204,12 @@ public class timearound {
             pc = ready_queue.get(0);  //获得队首
             if (pc!=null&&pc.iffinish()) {
                 ready_queue.remove(pc);
-                System.out.println(pc.getPro_name()+"结束"+nowtime);
+                System.out.println(pc.getPro_name()+"结束2"+nowtime);
                 count++;
                 while (refreshtime%time_size!=0){
                     refreshtime--;
                 }
-                if(count ==3 )
-                {
-                    try {
-                        LogList._instance.getLogList().append("RunTime:"+nowtime+"运行结束\n");
-                        Thread.sleep(90000000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
+
                 find_run_process();
                 return;
             }
@@ -223,7 +244,8 @@ public class timearound {
 
         pvblock_queue.add(pro);
         ready_queue.remove(pro);
-        LogList._instance.getLogList().append("RunTime:"+nowtime+pro.getPro_name()+"从就绪队列到阻塞队列"+"\n");
+
+        LogList._instance.getLogList().append("RunTime:"+nowtime+pro.getPro_name()+"从就绪队列到阻塞队列"+"\n");DeadLock();
     }
 
     public void B2R_queue(process pro)
@@ -306,6 +328,20 @@ public class timearound {
                 }
 
             }
+        }
+    }
+
+    public void DeadLock()
+    {
+        if(pvblock_queue.size() == 3-count)
+        {
+            deadlock = true;
+            LogList._instance.getLogList().append("RunTime:"+nowtime+"发生死锁\n");
+            Object[] options = { "是" };
+            JOptionPane.showOptionDialog(null, "发生死锁","死锁",JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+                    null, options,options);
+            timer.cancel();
+
         }
     }
 }
