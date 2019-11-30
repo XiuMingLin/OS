@@ -1,7 +1,7 @@
 /**
- * ½ø³ÌÀà
- * ÓÃÓÚÊµÏÖ TODO
- * ËùÓÐÊôÐÔ¶¼¾ßÓÐset¡¢get
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ * ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ TODO
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½setï¿½ï¿½get
  */
 
 package com.os.homework;
@@ -9,17 +9,17 @@ package com.os.homework;
 import java.util.ArrayList;
 
 public class process {
-    private int Arrive_time;      //µ½´ïÊ±¼ä
-    private int Server_time;      //ÔËÐÐÊ±¼ä
-    private ArrayList<Integer> Critical_stime_List;       //ÁÙ½ç×ÊÔ´¿ªÊ¼Ê±¼äµÄÁÐ±í£¨¶à´Î£©
-    private ArrayList<Integer> Critical_etime_Liat;       //ÁÙ½ç×ÊÔ´½áÊøÊ±¼äµÄÁÐ±í£¨¶à´Î£©
+    private int Arrive_time;      //ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+    private int Server_time;      //ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+    private ArrayList<Integer> Critical_stime_List;       //ï¿½Ù½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½Ê¼Ê±ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½Î£ï¿½
+    private ArrayList<Integer> Critical_etime_Liat;       //ï¿½Ù½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½Î£ï¿½
     int p1_s_time = -1;
     int p1_e_time = -1;
     int p2_s_time = -1;
     int p2_e_time = -1;
-    private int IO_stime;             //IO¿ªÊ¼Ê±¼ä£¨¶à´Î£©
-    private int IO_etime;             //IO½áÊøÊ±¼ä£¨¶à´Î£©
-    private int runtime;          //ÒÑÔËÐÐÊ±¼ä
+    private int IO_stime;             //IOï¿½ï¿½Ê¼Ê±ï¿½ä£¨ï¿½ï¿½Î£ï¿½
+    private int IO_etime;             //IOï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä£¨ï¿½ï¿½Î£ï¿½
+    private int runtime;          //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
     private String pro_name;
 
     public process(String name)
@@ -130,22 +130,23 @@ public class process {
         return false;
     }
     public int whichv(){
-        if(runtime == p1_s_time){
-            return 1;
-        }else if(runtime == p2_s_time){
-            return 2;
-        } else if(runtime == p2_s_time&&runtime == p1_s_time)
+        if(runtime == p2_s_time&&runtime == p1_s_time)
             return 3;
+        else if(runtime == p2_s_time){
+            return 2;
+        } else if(runtime == p1_s_time){
+            return 1;
+        }
         return 0;
     }
     public int whichp(){
-        if(runtime == p1_s_time){
-            return 1;
-        }else if(runtime == p2_s_time){
+        if(runtime == p2_s_time&&runtime == p1_s_time)
+            return 3;
+        else if(runtime == p2_s_time){
             return 2;
         }
-        else if(runtime == p2_s_time&&runtime == p1_s_time)
-            return 3;
+        else if(runtime == p1_s_time){
+        return 1;}
         return 0;
     }
 

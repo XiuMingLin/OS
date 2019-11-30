@@ -20,6 +20,7 @@ import java.text.SimpleDateFormat;
 
 public class timearound {
     private int nowtime= 0 ;
+    int refreshtime = 0;
     IO io = new IO();
     boolean ioflag = false;
     static PV[] pv = new PV[2];
@@ -27,6 +28,7 @@ public class timearound {
         pv[0] = new PV();
         pv[1] = new PV();
     }
+    int count =0;
     process process1 = new process();
     process process2 = new process();
     process process3 = new process();
@@ -98,6 +100,12 @@ public class timearound {
             if (ioflag){
                 process p = io.out_IO_queue();
                 ready_queue.add(p);
+                if(!io.ifempty()){
+                    UtilInfos.UpdateIO(io.getIO_queue().get(0));
+                }
+                else{
+                    UtilInfos.UpdateIO(new process(""));
+            }
             }
         }
         else
@@ -108,7 +116,7 @@ public class timearound {
     public void RUN(){
         //运行
 
-        int cacheTime = 1000,delay = 2000;
+        int cacheTime = 6000,delay = 2000;
         init_pro();
 
         //单位时间一个循环
@@ -116,43 +124,74 @@ public class timearound {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                int whichpvsource = 0 ;
-                nowtime++;
                 arrive(); //到达进入就绪队列
-                io_op();  //io运行 io完成进入就绪队列
 
                 ProcessRuntime.UpdateTime();
-                UtilInfos.Updateinfo(null, nowtime);
 
+                find_run_process();
                 if(!ready_queue.isEmpty()) {
-                    pc = ready_queue.get(0);
-                    UtilInfos.Updateinfo(pc, nowtime);
-                    //从就绪进程中选择一个上cpu , 完成、io、pv资源被占用的离开
                     pc.run();
-
-                    if (pc.iffinish()) {
-                        ready_queue.remove(0);
-                        System.out.println("一个京城结束");
-                    } else if (pc.ifio()) {
-                        io.in_IO_queue(pc);
-                        ready_queue.remove(0);
-                    } else if (pc.ifp()) {
-                        p();
-                    } else if (pc.ifv()) {
-                        v();
-                    } else {
-                        ready_queue.set(0, pc);
-                    }
-
-
-                    if (!ready_queue.isEmpty()&&nowtime % time_size == 0) {   //时间片结束 调度
-                        process temp = ready_queue.get(0);
-                        ready_queue.remove(0);
+                    UtilInfos.Updateinfo(pc, nowtime);
+                    ready_queue.set(0, pc);
+                }
+                else {
+                    UtilInfos.Updateinfo(null, nowtime);
+                }
+                io_op();  //io运行 io完成进入就绪队列
+                nowtime++;
+                refreshtime++;
+                if (!ready_queue.isEmpty()&&refreshtime % time_size == 0) {   //时间片结束 调度
+                    process temp = ready_queue.get(0);
+                    ready_queue.remove(0);
+                    if(temp.getRuntime()!=temp.getServer_time())
                         ready_queue.add(temp);
+                    else{
+                        System.out.println(temp.getPro_name()+"结束"+nowtime);
                     }
                 }
             }
         }, delay, cacheTime);
+    }
+    public void find_run_process(){
+        if(!ready_queue.isEmpty()) {  //就绪队列非空
+            pc = ready_queue.get(0);  //获得队首
+
+            if (pc!=null&&pc.iffinish()) {
+                ready_queue.remove(0);
+                System.out.println(pc.getPro_name()+"结束"+nowtime);
+                count++;
+                while (refreshtime%time_size!=0){
+                    refreshtime--;
+                }
+                if(count ==3 )
+                {
+                    return;
+                }
+                find_run_process();
+            }
+            if (pc!=null&&pc.ifio()) {
+                io.in_IO_queue(pc);
+                while (refreshtime%time_size!=0){
+                    refreshtime--;
+                }
+                ready_queue.remove(pc);
+                find_run_process();
+            }
+            if (pc!=null&&pc.ifp()) {
+                p();
+            }
+            if (pc!=null&&pc.ifv()) {
+                v();
+                UtilInfos.Updateinfo(pc, nowtime);
+                ready_queue.set(0, pc);
+            }
+            }
+        else{
+            pc = null;
+        }
+
+
+
     }
 
     public void R2B_queue(process pro)
@@ -176,16 +215,20 @@ public class timearound {
             {
                 pv[whichpvsource - 1].P();
                 Source.UpdateSouce(whichpvsource, pc);
+
             }
             else{
                 //资源被占用 进入pv队列
                 R2B_queue(pc);
+                find_run_process();
             }
         }
         else{
             if(!pv[0].ifoccupy&&!pv[1].ifoccupy) { //资源没有被占用
                 pv[1].P();
                 pv[0].P();
+                Source.UpdateSouce(whichpvsource, pc);
+
             }
             else{
                 //资源被占用 进入pv队列
@@ -198,11 +241,14 @@ public class timearound {
     public void v(){
         //释放资源
         int  whichv = pc.whichv();
-        if(whichv == 1 || whichv == 2)
+        if(whichv == 1 || whichv == 2) {
             pv[whichv-1].V();
+            Source.UpdateSouce(whichv, new process(""));
+        }
         else if(whichv == 3){
             pv[0].V();
             pv[1].V();
+            Source.UpdateSouce(whichv, new process(""));
         }
         //判断pv队列中哪一个进就绪队列
         int which_source;
@@ -211,7 +257,7 @@ public class timearound {
             if (which_source == 3&&pv[0].ifoccupy==false&&pv[1].ifoccupy==false){
                 B2R_queue(i);
             }else {
-                if(!pv[which_source-1].ifoccupy){
+                if(which_source!=0&&!pv[which_source-1].ifoccupy){
                     B2R_queue(i);
                 }
             }
