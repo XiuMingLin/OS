@@ -143,9 +143,16 @@ public class timearound {
                 }
                 else {
                     UtilInfos.Updateinfo(null, nowtime);
+                    LogList._instance.getLogList().append("RunTime:"+nowtime+"CPU上无进程运行\n");
                 }
                 io_op();  //io运行 io完成进入就绪队列
 
+                if (pc!=null&&pc.ifv()) {
+                    v();
+//                    UtilInfos.Updateinfo(pc, nowtime);
+//                    return;
+                    //ready_queue.set(0, pc);
+                }
 
                 nowtime++;
                 refreshtime++;
@@ -183,6 +190,7 @@ public class timearound {
                     }
                 }
                 find_run_process();
+                return;
             }
             if (pc!=null&&pc.ifio()) {
                 io.in_IO_queue(pc);
@@ -191,14 +199,10 @@ public class timearound {
                 }
                 ready_queue.remove(pc);
                 find_run_process();
+                return;
             }
 
-            if (pc!=null&&pc.ifv()) {
-                v();
-                UtilInfos.Updateinfo(pc, nowtime);
-                return;
-                //ready_queue.set(0, pc);
-            }
+
             if (pc!=null&&pc.ifp()) {
                 p();
                 return;
@@ -237,7 +241,6 @@ public class timearound {
                 pv[whichpvsource - 1].P();
                 LogList._instance.getLogList().append("RunTime:"+nowtime+pc.getPro_name()+"获得资源"+whichpvsource+"\n");
                 Source.UpdateSouce(whichpvsource, pc);
-
             }
             else{
                 //资源被占用 进入pv队列
@@ -247,6 +250,7 @@ public class timearound {
                 while (refreshtime%time_size!=0){
                     refreshtime--;
                 }
+                return;
             }
         }
         else if(whichpvsource == 3){
@@ -265,11 +269,13 @@ public class timearound {
                 while (refreshtime%time_size!=0){
                     refreshtime--;
                 }
+                return;
             }
         }
 
 
     }
+
     public void v(){
         //释放资源
         int  whichv = pc.whichv();
