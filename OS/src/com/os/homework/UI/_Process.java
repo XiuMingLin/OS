@@ -131,6 +131,7 @@ public class _Process extends JPanel {
                 ArriveTimeTF1.setText("");
                 ArriveTimeTF2.setText("");
                 ArriveTimeTF3.setText("");
+                JBT.setEnabled(true);
             }
         });
         GridBagLayout gbl = new GridBagLayout();

@@ -26,10 +26,8 @@ public class UI extends JFrame {
         this.add(Source.getInstance());
         this.add(UtilInfos.getInstance());
         tr = new timearound();
-        this.add(Log.getInstance());
+        this.add(LogList.getInstance());
 
-        Log.getInstance().getLogList().append("±±¶ù¾©¶ùÈË\n");
-        Log.getInstance().getLogList().append("DADADA");
         //this.setLayout(new BorderLayout());
 
         //this.add(firstPanel,BorderLayout.WEST);

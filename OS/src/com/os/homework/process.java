@@ -96,7 +96,6 @@ public class process {
     public void run()
     {
         this.runtime ++;
-
     }
 
     public boolean ifp(){

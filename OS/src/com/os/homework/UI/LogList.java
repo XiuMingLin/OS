@@ -3,11 +3,11 @@ package com.os.homework.UI;
 import javax.swing.*;
 import java.awt.*;
 
-public class Log extends JPanel{
-    private static Log instance;
+public class LogList extends JPanel{
+    public static LogList _instance;
 //    JScrollPane jScrollPane = new JScrollPane();
-    TextArea logList = new TextArea("log:",16,40,TextArea.SCROLLBARS_VERTICAL_ONLY);
-    Log()
+    TextArea logList = new TextArea("Log:\n",16,40,TextArea.SCROLLBARS_VERTICAL_ONLY);
+    LogList()
     {
         //logList.setSize(750,80);
         //logList.setPreferredSize(new Dimension(200, 100));
@@ -25,9 +25,9 @@ public class Log extends JPanel{
         return logList;
     }
 
-    public static Log getInstance(){
-        if(instance == null)
-            instance = new Log();
-        return instance;
+    public static LogList getInstance(){
+        if(_instance == null)
+            _instance = new LogList();
+        return _instance;
     }
 }

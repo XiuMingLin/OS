@@ -9,13 +9,12 @@
 
 package com.os.homework;
 
+import com.os.homework.UI.LogList;
 import com.os.homework.UI.ProcessRuntime;
 import com.os.homework.UI.Source;
 import com.os.homework.UI.UtilInfos;
 
-import java.sql.SQLOutput;
 import java.util.*;
-import java.text.SimpleDateFormat;
 
 
 public class timearound {
@@ -46,6 +45,7 @@ public class timearound {
     public void setTime_size(int time_size) {
         this.time_size = time_size;
         System.out.println("时间片大小："+time_size);
+        LogList.getInstance().getLogList().append("时间片设置为"+time_size+"\n");
     }
 
     public process getProcess1() {
@@ -137,6 +137,7 @@ public class timearound {
                 find_run_process();
                 if(!ready_queue.isEmpty()) {
                     pc.run();
+                    LogList._instance.getLogList().append("RunTime:"+nowtime+pc.getPro_name()+"在CPU上运行\n");
                     UtilInfos.Updateinfo(pc, nowtime);
                     ready_queue.set(0, pc);
                 }
@@ -144,9 +145,12 @@ public class timearound {
                     UtilInfos.Updateinfo(null, nowtime);
                 }
                 io_op();  //io运行 io完成进入就绪队列
+
+
                 nowtime++;
                 refreshtime++;
                 if (!ready_queue.isEmpty()&&refreshtime % time_size == 0) {   //时间片结束 调度
+                    LogList._instance.getLogList().append("RunTime:"+nowtime+"时间片结束\n");
                     process temp = ready_queue.get(0);
                     ready_queue.remove(0);
                     if(temp.getRuntime()!=temp.getServer_time())
@@ -155,6 +159,7 @@ public class timearound {
                         System.out.println(temp.getPro_name()+"结束"+nowtime);
                     }
                 }
+
             }
         }, delay, cacheTime);
     }
@@ -171,6 +176,7 @@ public class timearound {
                 if(count ==3 )
                 {
                     try {
+                        LogList._instance.getLogList().append("RunTime:"+nowtime+"运行结束\n");
                         Thread.sleep(90000000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -186,14 +192,18 @@ public class timearound {
                 ready_queue.remove(pc);
                 find_run_process();
             }
-            if (pc!=null&&pc.ifp()) {
-                p();
-            }
+
             if (pc!=null&&pc.ifv()) {
                 v();
                 UtilInfos.Updateinfo(pc, nowtime);
+                return;
                 //ready_queue.set(0, pc);
             }
+            if (pc!=null&&pc.ifp()) {
+                p();
+                return;
+            }
+
         }
         else{
             pc = null;
@@ -209,6 +219,7 @@ public class timearound {
 
         pvblock_queue.add(pro);
         ready_queue.remove(pro);
+        LogList._instance.getLogList().append("RunTime:"+nowtime+pro.getPro_name()+"从就绪队列到阻塞队列"+"\n");
     }
 
     public void B2R_queue(process pro)
@@ -216,6 +227,7 @@ public class timearound {
         //阻塞队列——就绪队列
         ready_queue.add(pro);
         pvblock_queue.remove(pro);
+        LogList._instance.getLogList().append("RunTime:"+nowtime+pro.getPro_name()+"从阻塞队列到就绪队列"+"\n");
     }
     public void p(){
         int  whichpvsource = pc.whichp();
@@ -223,12 +235,14 @@ public class timearound {
             if(!pv[whichpvsource-1].ifoccupy)  //资源没有被占用
             {
                 pv[whichpvsource - 1].P();
+                LogList._instance.getLogList().append("RunTime:"+nowtime+pc.getPro_name()+"获得资源"+whichpvsource+"\n");
                 Source.UpdateSouce(whichpvsource, pc);
 
             }
             else{
                 //资源被占用 进入pv队列
                 R2B_queue(pc);
+//                LogList._instance.getLogList().append(pc.getPro_name()+"进入阻塞队列"+"\n");
                 find_run_process();
                 while (refreshtime%time_size!=0){
                     refreshtime--;
@@ -239,12 +253,15 @@ public class timearound {
             if(!pv[0].ifoccupy&&!pv[1].ifoccupy) { //资源没有被占用
                 pv[1].P();
                 pv[0].P();
+                LogList._instance.getLogList().append("RunTime:"+nowtime+pc.getPro_name()+"获得资源1和2"+"\n");
                 Source.UpdateSouce(whichpvsource, pc);
             }
             else{
                 //资源被占用 进入pv队列
                 R2B_queue(pc);
+//                LogList._instance.getLogList().append(pc.getPro_name()+"进入阻塞队列"+"\n");
                 find_run_process();
+
                 while (refreshtime%time_size!=0){
                     refreshtime--;
                 }
@@ -258,11 +275,13 @@ public class timearound {
         int  whichv = pc.whichv();
         if(whichv == 1 || whichv == 2) {
             pv[whichv-1].V();
+            LogList._instance.getLogList().append("RunTime:"+nowtime+pc.getPro_name()+"释放资源"+whichv+"\n");
             Source.UpdateSouce(whichv, new process(""));
         }
         else if(whichv == 3){
             pv[0].V();
             pv[1].V();
+            LogList._instance.getLogList().append("RunTime:"+nowtime+pc.getPro_name()+"释放资源1和2"+"\n");
             Source.UpdateSouce(whichv, new process(""));
         }
         //判断pv队列中哪一个进就绪队列
@@ -273,9 +292,11 @@ public class timearound {
                 which_source = processsssssss.whichp();
                 if (which_source == 3&&pv[0].ifoccupy==false&&pv[1].ifoccupy==false){
                     B2R_queue(processsssssss);
+                    break;
                 }
                 if((which_source==1||which_source ==2)&&!pv[which_source-1].ifoccupy){
                     B2R_queue(processsssssss);
+                    break;
                 }
 
             }
