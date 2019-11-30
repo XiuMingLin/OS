@@ -6,15 +6,34 @@ import java.awt.*;
 
 public class UI extends JFrame {
     public static timearound tr;
+    private static UI instance;
+    public static UI getInstance(){
+        if(instance==null){
+            instance = new UI();
+        }
+        return instance;
+    }
+
     public UI(){
-        tr = new timearound();
-        this.setSize(960,480);
+        super("复杂题目1");
+        //JPanel firstPanel = new JPanel(new FlowLayout());
+        //firstPanel.setSize(480,480);
         this.setLayout(new FlowLayout());
+        this.setSize(900,800);
         this.add(TimeClip.getInstance());
         this.add(_Process.getInstance());
         this.add(ProcessRuntime.getInstance());
-        this.add(UtilInfos.getInstance());
         this.add(Source.getInstance());
+        this.add(UtilInfos.getInstance());
+        tr = new timearound();
+        this.add(Log.getInstance());
+
+        Log.getInstance().getLogList().append("北儿京儿人\n");
+        Log.getInstance().getLogList().append("DADADA");
+        //this.setLayout(new BorderLayout());
+
+        //this.add(firstPanel,BorderLayout.WEST);
+
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }

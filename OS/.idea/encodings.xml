@@ -2,6 +2,11 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/src/com/os/homework/UI/ProcessRuntime.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/os/homework/UI/Source.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/os/homework/UI/TimeClip.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/os/homework/UI/UI.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/os/homework/UI/UtilInfos.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/os/homework/UI/_Process.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/os/homework/timearound.java" charset="GBK" />
   </component>
 </project>

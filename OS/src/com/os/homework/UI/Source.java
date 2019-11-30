@@ -62,4 +62,10 @@ public class Source extends JPanel {
             }
         }
     }
+
+    public static void resetSource()
+    {
+        source1TF.setText("");
+        source2TF.setText("");
+    }
 }

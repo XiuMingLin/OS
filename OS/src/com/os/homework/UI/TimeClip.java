@@ -23,13 +23,13 @@ public class TimeClip extends JPanel {
                 UI.tr.setTime_size(Integer.parseInt(timeClipTF.getText()));
             }
         });
-        this.add(Box.createHorizontalStrut(220));
+        this.add(Box.createHorizontalStrut(242));
         this.add(timeClipLable);
         this.add(Box.createHorizontalStrut(50));
         this.add(timeClipTF);
         this.add(Box.createHorizontalStrut(50));
         this.add(timeClipButton);
-        this.add(Box.createHorizontalStrut(220));
+        this.add(Box.createHorizontalStrut(242));
 
 
 

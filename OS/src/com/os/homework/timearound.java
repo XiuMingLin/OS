@@ -19,6 +19,12 @@ import java.text.SimpleDateFormat;
 
 
 public class timearound {
+    public Timer timer;
+    public static timearound instance;
+    public timearound()
+    {
+        instance = this;
+    }
     private int nowtime= 0 ;
     int refreshtime = 0;
     IO io = new IO();
@@ -120,7 +126,7 @@ public class timearound {
         init_pro();
 
         //单位时间一个循环
-        Timer timer = new Timer();
+        timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {

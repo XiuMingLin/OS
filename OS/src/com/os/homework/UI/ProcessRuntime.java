@@ -73,4 +73,11 @@ public class ProcessRuntime extends JPanel {
         process2TF.setText(String.valueOf(UI.tr.getProcess2().getRuntime()));
         process3TF.setText(String.valueOf(UI.tr.getProcess3().getRuntime()));
     }
+
+    public static void resetTime()
+    {
+        process1TF.setText("");
+        process2TF.setText("");
+        process3TF.setText("");
+    }
 }

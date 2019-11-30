@@ -45,6 +45,7 @@ public class _Process extends JPanel {
     JTextField ArriveTimeTF2 = new JTextField(6);
     JTextField ArriveTimeTF3 = new JTextField(6);
     JButton JBT = new JButton("»∑∂®");
+    JButton resetBtn = new JButton("÷ÿ÷√");
     private static _Process instance;
     public static _Process getInstance(){
         if(instance==null){
@@ -91,6 +92,45 @@ public class _Process extends JPanel {
                 UI.tr.setProcess2(process2);
                 UI.tr.setProcess3(process3);
                 UI.tr.RUN();
+
+                JBT.setEnabled(false);
+            }
+        });
+
+        resetBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                runTimeTF1.setText("");
+                runTimeTF2.setText("");
+                runTimeTF3.setText("");
+
+                S1waitTimeTF1.setText("");
+                S1waitTimeTF2.setText("");
+                S1waitTimeTF3.setText("");
+
+                S1signalTimeTF1.setText("");
+                S1signalTimeTF2.setText("");
+                S1signalTimeTF3.setText("");
+
+                S2waitTimeTF1.setText("");
+                S2waitTimeTF2.setText("");
+                S2waitTimeTF3.setText("");
+
+                S2signalTimeTF1.setText("");
+                S2signalTimeTF2.setText("");
+                S2signalTimeTF3.setText("");
+
+                IOStartTF1.setText("");
+                IOStartTF2.setText("");
+                IOStartTF3.setText("");
+
+                IOFinishTF1.setText("");
+                IOFinishTF2.setText("");
+                IOFinishTF3.setText("");
+
+                ArriveTimeTF1.setText("");
+                ArriveTimeTF2.setText("");
+                ArriveTimeTF3.setText("");
             }
         });
         GridBagLayout gbl = new GridBagLayout();
@@ -101,7 +141,7 @@ public class _Process extends JPanel {
         gbc.weighty=0;
         gbc.gridx=counter++;
         gbc.gridy=0;
-        this.add(Box.createHorizontalStrut(70),gbc);
+        this.add(Box.createHorizontalStrut(10),gbc);
         gbc.gridx=counter++;
         this.add(Box.createHorizontalStrut(30),gbc);
         gbc.gridx=counter++;
@@ -141,7 +181,7 @@ public class _Process extends JPanel {
         counter=0;
         gbc.gridy=1;
         gbc.gridx=counter++;
-        this.add(Box.createHorizontalStrut(70),gbc);
+        this.add(Box.createHorizontalStrut(10),gbc);
         gbc.gridx=counter++;
         this.add(process1Label,gbc);
         gbc.gridx=counter++;
@@ -182,7 +222,7 @@ public class _Process extends JPanel {
         counter=0;
         gbc.gridy=2;
         gbc.gridx=counter++;
-        this.add(Box.createHorizontalStrut(70),gbc);
+        this.add(Box.createHorizontalStrut(10),gbc);
         gbc.gridx=counter++;
         this.add(process2Label,gbc);
         gbc.gridx=counter++;
@@ -218,12 +258,13 @@ public class _Process extends JPanel {
         this.add(ArriveTimeTF2,gbc);
         gbc.gridx=counter++;
         this.add(Box.createHorizontalStrut(30),gbc);
-        gbc.gridx=counter++;
+
+        this.add(resetBtn,gbc);
 
         counter=0;
         gbc.gridy=3;
         gbc.gridx=counter++;
-        this.add(Box.createHorizontalStrut(70),gbc);
+        this.add(Box.createHorizontalStrut(10),gbc);
         gbc.gridx=counter++;
         this.add(process3Label,gbc);
         gbc.gridx=counter++;
@@ -261,6 +302,7 @@ public class _Process extends JPanel {
 //        gbc.gridx=counter++;
 
         this.add(JBT,gbc);
+
         counter = 0;
 
 
