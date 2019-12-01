@@ -8,8 +8,8 @@ import java.awt.event.ActionListener;
 public class LogList extends JPanel{
     public static LogList _instance;
 //    JScrollPane jScrollPane = new JScrollPane();
-    TextArea logList = new TextArea("Log:\n",16,40,TextArea.SCROLLBARS_VERTICAL_ONLY);
-    JButton resetBtn = new JButton("reset");
+    TextArea logList = new TextArea("Log:\n",10,40,TextArea.SCROLLBARS_VERTICAL_ONLY);
+    JButton resetBtn = new JButton("Reset");
     LogList()
     {
         resetBtn.addActionListener(new ActionListener() {

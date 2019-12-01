@@ -12,7 +12,7 @@ public class UtilInfos extends JPanel {
     JLabel cpuLabel = new JLabel("cpu");
     JLabel IOLabel = new JLabel("IO");
     JLabel timeLabel = new JLabel("当前时间");
-    JButton resetBtn = new JButton("充值");
+    JButton resetBtn = new JButton("重置");
     JButton stopBtn = new JButton("停止");
     static JTextField cpuTF = new JTextField(6);
     static JTextField IOTF = new JTextField(6);

@@ -2,13 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8de7bcf2-125e-4aa6-a0c8-37817cea6699" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/os/homework/UI/Background.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/os/homework/UI/bg.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OS/com/os/homework/UI/bg.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/os/homework/UI/Background.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/os/homework/UI/LogList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/os/homework/UI/LogList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/os/homework/UI/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/os/homework/UI/UI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/os/homework/UI/UtilInfos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/os/homework/UI/UtilInfos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/os/homework/timearound.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/os/homework/timearound.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/os/homework/UI/bg.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/bg.jpg" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,6 +43,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Study\Github\OS\OS\src" />
       <recent name="D:\Study\Github\OS\OS\src\com\os\homework\UI" />
       <recent name="C:\Users\xixi\Documents\GitHub\OS\OS\src\com\os\homework" />
     </key>
@@ -59,7 +60,20 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.MAIN">
+    <configuration name="Background" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.os.homework.UI.Background" />
+      <module name="OS" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.os.homework.UI.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MAIN" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.os.homework.MAIN" />
       <module name="OS" />
@@ -76,6 +90,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.MAIN" />
+        <item itemvalue="Application.Background" />
       </list>
     </recent_temporary>
   </component>
@@ -91,6 +106,8 @@
       <updated>1575028399040</updated>
       <workItem from="1575028402285" duration="6776000" />
       <workItem from="1575122560400" duration="10581000" />
+      <workItem from="1575163252538" duration="4224000" />
+      <workItem from="1575172353699" duration="537000" />
     </task>
     <servers />
   </component>
@@ -102,7 +119,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
